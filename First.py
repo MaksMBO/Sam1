@@ -3,9 +3,9 @@ class Rectangle(object):
         self.length = 1
         self.width = 1
 
-    def set(self, length, width):
-        self.length = length
-        self.width = width
+    def set(self, lgth, wid):
+        self.length = lgth
+        self.width = wid
         if not self.length <= 20 or not self.length > 0:
             self.length = 1
         if not self.width <= 20 or not self.width > 0:

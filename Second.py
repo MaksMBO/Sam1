@@ -1,29 +1,28 @@
-import math
+from math import gcd
 
 
 class Rational:
-    __numerator = 1
-    __denominator = 1
-
     def __init__(self, numerator, denominator):
-        self.numerator = numerator
-        self.denominator = denominator
-        if type(self.numerator) != int:
-            print("Variable type is not \"int\"")
-            numerator = 1
-            denominator = 1
-        if self.denominator == 0:
-            print("None")
-            denominator = 1
+        if not isinstance(numerator, int):
+            raise TypeError("The entered value is of the wrong type")
+        if not denominator:
+            raise ValueError("Cannot be divided by zero")
+
+        self.__numerator = numerator
+        self.__denominator = denominator
+
+        hcf = gcd(self.__numerator, self.__denominator)
+        if hcf:
+            self.__numerator /= hcf
+            self.__denominator /= hcf
 
     def reduction(self):
-        if type(self.numerator / self.denominator) != 0:
-            return self.numerator / math.gcd(self.numerator, self.denominator), self.denominator / math.gcd(
-                self.numerator, self.denominator)
-        else:
-            return self.numerator, self.denominator
+        return f"{int(self.__numerator)}/{int(self.__denominator)}"
+
+    def result(self):
+        return self.__numerator / self.__denominator
 
 
-rational = Rational(1, 6)
-print(f"{int(rational.reduction()[0])}/{int(rational.reduction()[1])}")
-print(rational.reduction()[0]/rational.reduction()[1])
+rational = Rational(2, 6)
+print(rational.reduction())
+print(rational.result())
