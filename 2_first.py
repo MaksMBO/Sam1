@@ -14,7 +14,8 @@ class Customer:
 
 
 class Order:
-    def result(self, person, *args):
+    @staticmethod
+    def result(person, *args):
         list_prices = []
         list_descriptions = []
         list_dimensions = []
@@ -25,7 +26,8 @@ class Order:
         return list_prices, ", ".join(list_descriptions), ", ".join(
             [person.surname, person.name, person.patronymic, person.mobile_phone])
 
-    def information(self, product):
+    @staticmethod
+    def information(product):
         list_products = [str(product.price), product.description, str(product.dimensions)]
         return ", ".join(list_products)
 
@@ -45,4 +47,3 @@ print(f"\n\n\nPrice list:\n"
       f"{order.information(orange)}\n"
       f"{order.information(apple)}\n"
       f"{order.information(salt)}")
-
