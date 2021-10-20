@@ -1,3 +1,6 @@
+import re
+
+
 class Text:
     def __init__(self, name):
         self.file = name
@@ -6,8 +9,7 @@ class Text:
         file = open(self.file)
         num = 0
         for line in file:
-            for i in line:
-                num += 1
+            num += len(re.split(r'.', line)) - 1
         file.close()
         return num
 
@@ -20,9 +22,6 @@ class Text:
         return num
 
     def number_of_offers(self):
-        first_char = False
-        second_char = False
-        third_char = False
         file = open(self.file)
         num = 0
         ellipsis = 0
