@@ -9,7 +9,7 @@ class GROUP:
 
     def sorting(self):
         """"Selects the top five, according to the average score, students"""
-        return sorted(self.students, key=lambda stud: stud.average_score())[-1:-6:-1]
+        return sorted(self.students, key=lambda stud: stud.average_score)[-1:-6:-1]
 
 
 class STUDENT:
@@ -18,16 +18,46 @@ class STUDENT:
     def __init__(self, name, surname, **grades):
         STUDENT.student_number += 1
         if STUDENT.student_number <= 20:
-            self.name = name
-            self.surname = surname
-            self.student_number = STUDENT.student_number
-            self.grade = grades
+            self.__name = name
+            self.__surname = surname
+            self.__student_number = STUDENT.student_number
+            self.__grade = grades
         else:
             raise ValueError("The number of students cannot exceed 20")
 
+    @property
     def average_score(self):
         """"Calculates the average score of all students in the group"""
-        return sum(self.grade.values()) / len(self.grade)
+        return sum(self.__grade.values()) / len(self.__grade)
+
+    @property
+    def get_name(self):
+        return self.__name
+
+    @property
+    def get_student_number(self):
+        return self.__student_number
+
+    @property
+    def get_surname(self):
+        return self.__surname
+
+    @property
+    def get_grade(self):
+        return self
+
+    @get_name.setter
+    def set_name(self, name):
+        STUDENT.student_number += 1
+        self.__name = name
+
+    @get_surname.setter
+    def set_surname(self, surname):
+        self.__surname = surname
+
+    @get_grade.setter
+    def set_grade(self, **grade):
+        self.__grade = grade
 
 
 Maksim = STUDENT('Maksim', 'Brediuk', maths=84, basics_of_programming=85, discrete_math=98)
@@ -56,10 +86,11 @@ Alex = STUDENT('Evgen', 'Stepura', maths=86, basics_of_programming=96, discrete_
 group = GROUP(Maksim, Vlad, David, Misha, Andrey, Nikolay, Alexander, Valentine, Evgeniy, Evgen, Evgeni, Evge, Evg, Ev,
               E, Alexande, Alexand, Alexan, Alexa, Alex)
 
+
 for student in group.get_students_grades():
-    print(f"Name: {student.name}, student number: {student.student_number} ,"
-          f" average score:  {round(student.average_score(), 2)}")
+    print(f"Name: {student.get_name}, student number: {student.get_student_number} ,"
+          f" average score:  {round(student.average_score, 2)}")
 print("\n\n")
 for student in group.sorting():
-    print(f"Name: {student.name}, student number: {student.student_number} ,"
-          f" average score:  {round(student.average_score(), 2)}")
+    print(f"Name: {student.get_name}, student number: {student.get_student_number} ,"
+          f" average score:  {round(student.average_score, 2)}")

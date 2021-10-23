@@ -1,4 +1,5 @@
 import re
+import string
 
 
 class Text:
@@ -9,15 +10,17 @@ class Text:
         file = open(self.file)
         num = 0
         for line in file:
-            num += len(re.split(r'.', line)) - 1
+            for char in line:
+                if char not in string.whitespace:
+                    num += 1
         file.close()
         return num
 
     def number_words(self):
         file = open(self.file)
         num = 0
-        for i in file:
-            num += len(i.split())
+        for line in file:
+            num += len(re.findall(r"\w+", line))
         file.close()
         return num
 
@@ -25,11 +28,11 @@ class Text:
         file = open(self.file)
         num = 0
         ellipsis = 0
-        for i in file:
-            num += i.count('.')
-            ellipsis += i.count('...')
-            num += i.count('!')
-            num += i.count('?')
+        for line in file:
+            num += line.count('.')
+            ellipsis += line.count('...')
+            num += line.count('!')
+            num += line.count('?')
         num -= 2 * ellipsis
         file.close()
         return num

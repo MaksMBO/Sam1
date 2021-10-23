@@ -1,34 +1,42 @@
 class Rectangle(object):
     def __init__(self):
-        self.length = 1
-        self.width = 1
+        self.__length = 1
+        self.__width = 1
 
-    def set(self, lgth, wid):
-        self.length = lgth
-        self.width = wid
-        if not self.length <= 20 or not self.length > 0:
-            self.length = 1
-        if not self.width <= 20 or not self.width > 0:
-            self.width = 1
-
+    @property
     def get(self):
-        return self.length, self.width
+        return self.__length, self.__width
 
     def perimeter(self):
-        return 2 * (self.length + self.width)
+        return 2 * (self.__length + self.__width)
 
-    def square(self):
-        return self.length * self.width
+    def area(self):
+        return self.__length * self.__width
+
+    @get.setter
+    def set(self, val):
+        self.__length = val[0]
+        self.__width = val[1]
+        if not self.__length <= 20 or not self.__length > 0:
+            self.__length = 1
+        if not self.__width <= 20 or not self.__width > 0:
+            self.__width = 1
 
 
-try:
-    rectangle = Rectangle()
-    length = float(input("Length: "))
-    width = float(input("Width: "))
+rectangle = Rectangle()
 
-    rectangle.set(length, width)
-    print(f"Length: {rectangle.get()[0]} \nWidth: {rectangle.get()[1]}")
-    print(f"Perimeter: {rectangle.perimeter()}")
-    print(f"Square: {rectangle.square()}")
-except ValueError:
-    print("You did not enter incorrect data!")
+length = input("Length: ")
+if not length.isdecimal():
+    raise ValueError("You did not enter incorrect data!")
+length = float(length)
+
+width = input("Width: ")
+if not width.isdecimal():
+    raise ValueError("You did not enter incorrect data!")
+width = float(width)
+
+values = [length, width]
+rectangle.set = values
+print(f"Length: {rectangle.get[0]} \nWidth: {rectangle.get[1]}")
+print(f"Perimeter: {rectangle.perimeter()}")
+print(f"Square: {rectangle.area()}")

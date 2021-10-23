@@ -34,10 +34,9 @@ class TREE:
             else:
                 self.adding_products(key, price, root.right)
 
-    def serch(self, key):
+    def search(self, key):
         """"Find the item you want"""
-        if self.root is not None:
-            return self.searching(key, self.root)
+        return self.searching(key, self.root)
 
     def searching(self, key, root):
         """"Find the item you want"""
@@ -60,7 +59,7 @@ class BINARYTREE:
 
     def get_value(self, key, value):
         """"Getting a price for a certain amount of goods"""
-        return value * self.tree.serch(key)
+        return value * self.tree.search(key)
 
 
 my_tree = BINARYTREE(TREE())
@@ -71,8 +70,8 @@ my_tree.new_object(1, 34)
 my_tree.new_object(5, 7)
 
 product_code = int(input("Enter the product code: "))
-product_quantity = int(input("Enter the product code: "))
+product_quantity = int(input("Enter the product quantity: "))
 if product_code <= 0 or product_code > 5 or product_quantity < 0:
     raise ValueError("Incorrect data")
 
-print(f"{my_tree.get_value(product_code, product_quantity)}")
+print(f"Result: {my_tree.get_value(product_code, product_quantity)}")
