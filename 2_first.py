@@ -17,22 +17,22 @@ class Product:
         return self.__dimensions
 
     @dimensions.setter
-    def dimensions(self, value):
-        if not isinstance(value, (int, float)):
+    def dimensions(self, dimensions):
+        if not isinstance(dimensions, (int, float)) or not dimensions:
             raise TypeError("The value must be a number")
-        self.__dimensions = value
+        self.__dimensions = dimensions
 
     @description.setter
-    def description(self, value):
-        if not isinstance(value, str):
+    def description(self, description):
+        if not isinstance(description, str) or not description:
             raise TypeError("The value must be a string")
-        self.__description = value
+        self.__description = description
 
     @price.setter
-    def price(self, value):
-        if not isinstance(value, (int, float)) or value < 0:
+    def price(self, price):
+        if not isinstance(price, (int, float)) or price < 0 or not price:
             raise TypeError("The value must be a number and greater than zero")
-        self.__price = value
+        self.__price = price
 
     def __str__(self):
         return f"{self.description} = {self.__price}"
@@ -50,10 +50,10 @@ class Customer:
         return self.__surname
 
     @surname.setter
-    def surname(self, value):
-        if not isinstance(value, str):
+    def surname(self, surname):
+        if not isinstance(surname, str):
             raise TypeError("The value must be a string")
-        self.__surname = value
+        self.__surname = surname
 
     @property
     def patronymic(self):
@@ -64,26 +64,26 @@ class Customer:
         return self.__mobile_phone
 
     @mobile_phone.setter
-    def mobile_phone(self, value):
-        if not isinstance(value, str):
+    def mobile_phone(self, mobile_phone):
+        if not isinstance(mobile_phone, str):
             raise ValueError('The value must be a string')
-        self.__mobile_phone = value
+        self.__mobile_phone = mobile_phone
 
     @patronymic.setter
-    def patronymic(self, value):
-        if not isinstance(value, str):
+    def patronymic(self, patronymic):
+        if not isinstance(patronymic, str):
             raise TypeError("The value must be a string")
-        self.__patronymic = value
+        self.__patronymic = patronymic
 
     @property
     def name(self):
         return self.__name
 
     @name.setter
-    def name(self, value):
-        if not isinstance(value, str):
+    def name(self, name):
+        if not isinstance(name, str):
             raise TypeError("The value must be a string")
-        self.__name = value
+        self.__name = name
 
 
 class Order:
@@ -96,20 +96,20 @@ class Order:
         return self.__person
 
     @person.setter
-    def person(self, value):
-        if not value:
+    def person(self, person):
+        if not person:
             raise TypeError("No value")
-        self.__person = value
+        self.__person = person
 
     @property
     def products(self):
         return self.__products
 
     @products.setter
-    def products(self, value):
-        if not value:
+    def products(self, products):
+        if not products:
             raise TypeError("No value")
-        self.__products = value
+        self.__products = products
 
     def result(self):
         list_prices = []
