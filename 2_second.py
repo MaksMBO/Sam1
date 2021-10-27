@@ -4,7 +4,10 @@ import string
 
 class Text:
     def __init__(self, name):
-        self.file = name
+        try:
+            self.file = name
+        except FileNotFoundError:
+            raise FileNotFoundError("File not found")
 
     def chartes(self):
         file = open(self.file)
@@ -20,20 +23,15 @@ class Text:
         file = open(self.file)
         num = 0
         for line in file:
-            num += len(re.findall(r"\w+", line))
+            num += len(re.findall(r"[A-Za-z`]+", line))
         file.close()
         return num
 
     def number_of_offers(self):
         file = open(self.file)
         num = 0
-        ellipsis = 0
         for line in file:
-            num += line.count('.')
-            ellipsis += line.count('...')
-            num += line.count('!')
-            num += line.count('?')
-        num -= 2 * ellipsis
+            num += len(re.findall(r"\w+[.?!]+", line))
         file.close()
         return num
 

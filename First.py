@@ -1,11 +1,20 @@
 class Rectangle(object):
-    def __init__(self):
-        self.__length = 1
-        self.__width = 1
+    def __init__(self, length=1, width=1):
+        self.length = length
+        self.width = width
+
+    @staticmethod
+    def check(value):
+        if not 0 < value < 20:
+            raise ValueError("Length must be greater than 0 and less than 20")
 
     @property
-    def get(self):
-        return self.__length, self.__width
+    def length(self):
+        return self.__length
+
+    @property
+    def width(self):
+        return self.__width
 
     def perimeter(self):
         return 2 * (self.__length + self.__width)
@@ -13,30 +22,26 @@ class Rectangle(object):
     def area(self):
         return self.__length * self.__width
 
-    @get.setter
-    def set(self, val):
-        self.__length = val[0]
-        self.__width = val[1]
-        if not self.__length <= 20 or not self.__length > 0:
-            self.__length = 1
-        if not self.__width <= 20 or not self.__width > 0:
-            self.__width = 1
+    @width.setter
+    def width(self, width):
+        self.check(width)
+        self.__width = width
+
+    @length.setter
+    def length(self, length):
+        self.check(length)
+        self.__length = length
 
 
 rectangle = Rectangle()
 
-length = input("Length: ")
-if not length.isdecimal():
-    raise ValueError("You did not enter incorrect data!")
-length = float(length)
+try:
+    rectangle.length = float(input("Length: "))
+    rectangle.width = float(input("Width: "))
+except ValueError or TypeError:
+    print("You did not enter incorrect data!")
+    raise SystemExit
 
-width = input("Width: ")
-if not width.isdecimal():
-    raise ValueError("You did not enter incorrect data!")
-width = float(width)
-
-values = [length, width]
-rectangle.set = values
-print(f"Length: {rectangle.get[0]} \nWidth: {rectangle.get[1]}")
+print(f"Length: {rectangle.length} \nWidth: {rectangle.width}")
 print(f"Perimeter: {rectangle.perimeter()}")
 print(f"Square: {rectangle.area()}")
