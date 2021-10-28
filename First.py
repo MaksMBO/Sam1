@@ -40,8 +40,7 @@ try:
     rectangle.width = float(input("Width: "))
 except ValueError or TypeError:
     print("You did not enter incorrect data!")
-    raise SystemExit
-
-print(f"Length: {rectangle.length} \nWidth: {rectangle.width}")
-print(f"Perimeter: {rectangle.perimeter()}")
-print(f"Square: {rectangle.area()}")
+else:
+    print(f"Length: {rectangle.length} \nWidth: {rectangle.width}")
+    print(f"Perimeter: {rectangle.perimeter()}")
+    print(f"Square: {rectangle.area()}")
